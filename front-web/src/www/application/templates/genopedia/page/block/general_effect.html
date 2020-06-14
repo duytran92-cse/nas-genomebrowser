@@ -1,0 +1,78 @@
+<div>
+    <span>
+      <h1 class="green_border_txt">{{ title }}
+          <a href="/{{ key }}_block/view/{{ id }}">
+            <i id="text-block-{{ id }}" class="pull-right clickable fa fa-pencil-square-o editable edit-text-block-{{ id }}" aria-hidden="true"></i>
+          </a>
+      </h1>
+    </span>
+    <!-- <h1 class="green_border_txt">{{ title }}</h1> -->
+    <p class="semibold_txt line_hgt"></p><p>{{ text }}</p>
+      <div class="tab-content" style="margin-top: 5px">
+        <div id="effect-tab-1" class="tab-pane fade in active">
+        {% for item in genotypes %}
+          <div class="blue_s row" title="Click to display {{ item.genotype }} genetic type in the diagram">
+                <div style="background-color: {{ item.box_color }};width:113px; float:left;margin-right:10px">
+                    <p class="hdng_new_type" id="head-{{item.id}}"> {{ item.genotype }} </p>
+                </div>
+                <div style="margin-top:10px;width: 86%;float: right">
+                {% if item.genotype in risks %}
+                  <div class="risk_secs " id="content-{{item.id}}">
+                      <div class="innertable">
+                          {% for key, risk in risks.items %}
+                            {% if key == item.genotype %}
+                                {% for val in risk %}
+                                <p>
+                                     <span>{{ val.risk }}</span> <span style="color:#011460;font-weight: bold;">{{ val.odd_ratio }}-fold</span>
+                                     <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ val.pmid }}" data-placement="bottom" title="Pmid: {{ val.pmid }}" data-toggle="tooltip" style="color:#95C809;cursor: pointer" ><i class= "glyphicon glyphicon-info-sign" > </i> </a>
+                                </p>
+                                {% endfor %}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                  <p class="semibold_txt">No associated risk</p>
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <ul class="nav pagin_ul">
+      {% for val in pop %}
+          <li class="nav {% if val.id == pop_active %} active {% endif %}">
+              <a data-toggle="tab" style="cursor:pointer" href="#" onclick="filter_pop('{{ val.id }}')">{{ val.label }}</a>
+          </li>
+      {% endfor %}
+      </ul>
+</div>
+
+<style>
+.tooltip-inner {
+    background-color:#EEEEEE !important;
+    color: #000000 !important;
+  }
+.tooltip-arrow {
+      border-bottom-color: #EEEEEE  !important;
+      color: #000000 !important;
+ }
+</style>
+<script>
+    function filter_pop(pop) {
+        location.href = "?filter="+ pop;
+    };
+    jQuery(document).ready(function() {
+        var arr_genotype = {{ genotype_js | safe }};
+        if (arr_genotype.length > 0) {
+            arr_genotype.map(function(val, key) {
+                var content = jQuery('#content-'+ val['id']);
+                if (content.height() > 78) {
+                    jQuery('#head-'+ val['id']).attr('style', 'line-height:'+ content.height()+ 'px');
+                }
+
+            })
+        }
+    });
+</script>

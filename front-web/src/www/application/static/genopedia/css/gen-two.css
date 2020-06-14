@@ -1,0 +1,457 @@
+/* ICONs */
+@font-face {
+    font-family: 'icomoon';
+
+    src:    url('../fonts/icomoon.eot?4pi3f');
+    src:    url('../fonts/icomoon.eot?4pi3f#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?4pi3f') format('truetype'),
+        url('../fonts/icomoon.woff?4pi3f') format('woff'),
+        url('../fonts/icomoon.svg?4pi3f#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: #C3C3C3;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/*
+	-----------------------------------------------
+	# - Sequence Genes
+	-----------------------------------------------
+ */
+* {
+  font-family: 'open_sansregular';
+}
+/* Custom */
+.sequencebrowser {
+    /*width: 1100px;*/
+    width: 1060px;
+    height: 286px;
+    background: #FFF;
+    position: absolute;
+    top: 360px;
+    right: 79px;
+    overflow: hidden;
+}
+
+.inner_con_banner {
+    overflow: hidden;
+    padding: 0;
+}
+
+.sequencebrowser-SNP {
+	margin-top: -230px;
+}
+.sequencebrowser-exon {
+	margin-top: -200px;
+}
+.genComponent-genTop {
+	position: absolute;
+    top: 27px;
+    left: 4px;
+}
+.genComponent-genBottom {
+	position: absolute;
+    top: 161px;
+    left: 4px;
+}
+
+.genComponent-exonTop {
+	left: 2px;
+}
+.genComponent-exonBottom {
+	position: absolute;
+    top: 152px;
+    left: 2px;
+}
+
+.variation-bar-top {
+    margin-top: 45px;
+}
+.variation-bar-bottom {
+    margin-top: 0px;
+}
+.genStringTop-gen {
+
+}
+.genStringBottom-gen {
+
+}
+.genStringTop-exon {
+	margin-top: 14px;
+	margin-left: 3px;
+}
+.genStringBottom-exon {
+	margin-top: 12px;
+	margin-left: 3px;
+}
+.genStringTop-snp {
+	margin-top: 7px;
+	margin-left: 2px;
+}
+.genStringBottom-snp {
+	margin-top: 4px;
+	margin-left: 2px;
+}
+.letter {
+    font-weight: 600;
+	font-family: "Courier New", Courier, monospace;
+    height: 18px;
+}
+/*.letter-mutation {
+    color: red;
+}*/
+.letter-no-mutaion {
+    color: green;
+}
+.letter-gray {
+    margin-top: 1px;
+	/*color: #AEAEAE !important;*/
+	/*color: #AEAEAE; /*--- fix here ---*/
+}
+/*
+	-----------------------------------------------
+	# - Gene name sequence gene
+	-----------------------------------------------
+ */
+.sequenceGenesName {
+	/*margin-top: 5px;*/
+    margin-bottom: -18px;
+    height: 35px;
+    position: relative;
+}
+.variation-name-bar {
+    /*margin-top: 5px;*/
+    /*margin-bottom: -18px;*/
+    height: 35px;
+    position: relative;
+}
+.topName {
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 900;
+    padding-left: 5px;
+    color: #1a3fa9;
+}
+.geneName {
+    font-weight: bold;
+    overflow: hidden;
+    position: absolute;
+}
+.exonName {
+    font-weight: 700;
+    height: 20px;
+    min-width: 100px;
+    position: absolute;
+    top: 35px;
+}
+.snpName {
+	height: 17px;
+	font-weight: 900;
+  display: inline-block;
+  min-width: 400px;
+}
+/*
+	-----------------------------------------------
+	# - Button control sequence gene
+	-----------------------------------------------
+ */
+.sequenceControlBtnGroup {
+    height: 23px;
+    background: #FFF;
+    position: absolute;
+    bottom: 0px;
+    right: 6px;
+}
+.leftGroup {
+	float: left;
+}
+.rightGroup {
+	float: right;
+}
+.sequenceMovingControlBtn {
+	padding: 12px;
+	cursor: pointer;
+	float: left;
+}
+.sequenceZoomControlBtn {
+	padding: 5px 8px;
+	cursor: pointer;
+	float: left;
+}
+.exon-indicator {
+	padding: 5px 8px;
+	float: left;
+}
+.exon-indicator-text {
+  color: black;
+  font-size: 13px;
+}
+.genPreBtn {
+	padding: 5px;
+}
+.genNextBtn {
+	padding: 5px;
+}
+.viewlevel {
+	float: left;
+	font-weight: 800;
+    padding: 3px 15px;
+}
+.snpNameCheckBox {
+    margin-left: 10px !important;
+}
+/*
+	-----------------------------------------------
+	# - Pointer
+	-----------------------------------------------
+ */
+.light {
+	color: #1A3FA9;
+}
+.dark {
+	color: #95C809;
+}
+.gray {
+  color: gray;
+}
+.pointer-hightlight {
+	color: #1A3FA9;
+}
+.pointer-hightlight-light {
+	color: #1A3FA9;
+}
+.pointer-hightlight-dark {
+	color: #95C809;
+}
+.icon-GenLong:before {
+    content: "\e900";
+}
+.icon-GenMed:before {
+    content: "\e901";
+}
+.icon-GenShort:before {
+    content: "\e902";
+}
+.pointer {
+	width: 9px;
+	float: left;
+    cursor: pointer;
+}
+.gene-pointer {
+    transform: scale(1.10);
+	margin-left: -5px;
+}
+
+.sequence { /* EX: ASDGFASDGFASDGFASDGFASDGF */
+	width: 9px;
+	float: left;
+}
+.exon-sequence {
+    width: 5px;
+    float: left;
+}
+.snp-pointer {
+	padding: 8px 9px 9px 0px;
+	transform: scale(2.30);
+}
+.variation-pointer {
+    cursor: pointer;
+}
+.snp-mutation-hightlight {
+	color: #FF5041 !important;
+}
+.snp-hightlight {
+	color: #89C049 !important;
+}
+.sequence-pointer-Hightlight {
+
+}
+.indicator {
+    position: absolute;
+    top: 0px;
+    background-color: #FFC5C5;
+    height: 500px;
+    padding: 4px;
+    display: none;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.behind {
+    width:100%;
+    position: relative;
+}
+.gene-wrapper {
+    padding: 42px 0px 55px 0px;
+    margin-top: 5px;
+}
+.gene-wrapper-color {
+    background: #d9f0ff;
+}
+.exon-pointer {
+    transform: scale(1.25);
+}
+.fa-search-left {
+  padding-left: 11px;
+}
+.exon-bar-top {
+    margin-top: 42px;
+    overflow: hidden;;
+}
+.exon-bar-bottom {
+  margin-top: -10px;
+    overflow: hidden;;
+}
+.exon-pointer-top {
+  width: 99999px;
+}
+.exon-pointer-bottom {
+  width: 99999px;
+}
+.variation-pointer-top {
+  width: 99999px;
+}
+.variation-pointer-bottom {
+  width: 99999px;
+}
+.variation-bar {
+	height: 110px;
+  overflow: hidden;
+  position: relative;
+}
+.gene-bar-top {
+    margin-top: 108px;
+}
+.gene-bar-bottom {
+    margin-top: 92px;
+}
+
+/************************************************************/
+/* Optimize */
+/*
+ * Note: Use even number for sequencebrowser width;
+*/
+/*.img-chrom-body {
+    padding: 13px 63px 0 0px;
+}*/
+/*  Scoll up (Zoom in) */
+
+/*  Scoll down (Zomm out)*/
+/*@media screen and (min-width: 700px) and (max-width: 800px) {
+    .sequencebrowser {
+        width: 480px;
+    }
+}
+@media screen and (min-width: 801px) and (max-width: 900px) {
+    .sequencebrowser {
+        width: 580px;
+    }
+}
+@media screen and (min-width: 901px) and (max-width: 1000px) {
+    .sequencebrowser {
+        width: 680px;
+    }
+}
+@media screen and (min-width: 1001) and (max-width: 1050px) {
+    .sequencebrowser {
+        width: 880px;
+    }
+}
+@media screen and (min-width: 1051px) and (max-width: 1100px) {
+    .sequencebrowser {
+        width: 780px;
+    }
+}
+@media screen and (min-width: 1151px) and (max-width: 1200px) {
+    .sequencebrowser {
+        width: 908px;
+    }
+}
+@media screen and (min-width: 1201px) and (max-width: 1250px) {
+    .sequencebrowser {
+        width: 958px;
+    }
+}
+@media screen and (min-width: 1251px) and (max-width: 1300px) {
+    .sequencebrowser {
+        width: 1004px;
+    }
+}
+@media screen and (min-width: 1301px) and (max-width: 1350px) {
+    .sequencebrowser {
+        width: 1048px;
+    }
+}
+@media screen and (min-width: 1351px) and (max-width: 1400px) {
+    .sequencebrowser {
+        width: 1096px;
+    }
+}
+@media screen and (min-width: 1401px) and (max-width: 1450px) {
+    .sequencebrowser {
+        width: 1142px;
+    }
+}
+@media screen and (min-width: 1451px) and (max-width: 1500px) {
+    .sequencebrowser {
+        width: 1184px;
+    }
+}
+@media screen and (min-width: 1501px) and (max-width: 1550px) {
+    .sequencebrowser {
+        width: 1246px;
+    }
+}
+@media screen and (min-width: 1551px) and (max-width: 1600px) {
+    .sequencebrowser {
+        width: 1294px;
+    }
+}
+@media screen and (min-width: 1601px) and (max-width: 1650px) {
+    .sequencebrowser {
+        width: 1346px;
+    }
+}
+@media screen and (min-width: 1651px) and (max-width: 1700px) {
+    .sequencebrowser {
+        width: 1400px;
+    }
+}
+@media screen and (min-width: 1701px) and (max-width: 1750px) {
+    .sequencebrowser {
+        width: 1444px;
+    }
+}
+@media screen and (min-width: 1751px) and (max-width: 1800px) {
+    .sequencebrowser {
+        width: 1480px;
+    }
+}
+@media screen and (min-width: 1801px) and (max-width: 1850px) {
+    .sequencebrowser {
+        width: 1540px;
+    }
+}
+@media screen and (min-width: 1851px) and (max-width: 1900px) {
+    .sequencebrowser {
+        width: 1580px;
+    }
+}
+@media screen and (min-width: 1901px) and (max-width: 2000px)  {
+    .sequencebrowser {
+        width: 1616px;
+    }
+}*/

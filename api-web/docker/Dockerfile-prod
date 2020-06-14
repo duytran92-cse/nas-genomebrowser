@@ -1,0 +1,4 @@
+FROM registry.novogenialab.com/notasquare-zero/images/nas-urad-api:0.1
+
+ENV APP_ENV prod
+ADD src/www /opt/www

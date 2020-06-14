@@ -1,0 +1,21 @@
+{% load static %}
+<div class="banner_new_bg">
+    <div class="banner_n banner_fill">
+        <div class="container">
+            <div class="inner_banner inner_banner_2">
+                <div class="heading_s_left heading_s green-border-btm" style="margin-bottom: 35px;">
+                    <img src="{% static 'genopedia/images/icon1.png' %}" alt="" /><span> <strong>{{ total_matched }}</strong> variations</span>
+                </div>
+                <div id="variations-list" class="banner_c not-margin">
+                    <div class="row" style="min-height: 500px">
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="listData_ul">
+                                {{ rows_html | safe }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

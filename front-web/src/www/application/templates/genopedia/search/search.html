@@ -1,0 +1,74 @@
+{% load static %}
+<div class="banner_new_bg">
+    <div class="banner_n banner_fill">
+        <div class="container">
+            <div class="inner_banner">
+                <div class="heading_p">
+                    <h1>We've found {{ countResult }} results to <span class="blue">{{ keyword }}</span></h1>
+                </div>
+                <div class="banner_c_search">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <h2 class="search_heading"><img src="{% static 'genopedia/images/icon4.png' %}" alt="" /> Diseases ({{ searchResult.disease | length }}) </h2>
+                            <ul class="search_ul">
+                                {% for disease in searchResult.disease %}
+                                    <li><a href='/disease/{{ disease.name }}'>>> {{ disease.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix gap3"></div>
+                            <h2 class="search_heading"><img src="{% static 'genopedia/images/icon3.png' %}" alt="" /> Genetic Variations ({{ searchResult.variation | length }})</h2>
+                            <ul class="search_ul">
+                                {% for variation in searchResult.variation %}
+                                    {% if variation.reference != '' %}
+                                        <li><a href='/variation/{{ variation.reference }}'>>> {{ variation.name }} (This is alternative name for SNP {{ variation.reference }})</a></li>
+                                    {%else%}
+                                        <li><a href='/variation/{{ variation.name }}'>>> {{ variation.name }}</a></li>
+                                    {%endif%}
+                                {% endfor %}
+                            </ul>
+
+                            <div class="clearfix gap3"></div>
+                            <h2 class="search_heading"><img src="{% static 'genopedia/images/icon2.png' %}" alt="" /> Genes ({{ searchResult.gene | length }})</h2>
+                            <ul class="search_ul">
+                                {% for gene in searchResult.gene %}
+                                    {% if gene.reference != '' %}
+                                        <li><a href='/gene/{{ gene.reference }}'>>> {{ gene.name }} (This is alternative name for gene {{ gene.reference }})</a></li>
+                                    {% else %}
+                                        <li><a href='/gene/{{ gene.name }}'>>> {{ gene.name }}</a></li>
+                                    {% endif %}
+
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 text-center">
+                            <img src="{% static 'genopedia/images/search_img.jpg' %}" alt="" />
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            <h2 class="search_heading_right"><img src="{% static 'genopedia/images/icon7.png' %}" alt="" /> Treatments {{ searchResult.treatment | length }}) </h2>
+                            <ul class="search_ul_right">
+                                {% for treatment in searchResult.treatment %}
+                                    <li>>> {{ treatment.name }}</li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="clearfix gap3"></div>
+
+                            <h2 class="search_heading_right"><img src="{% static 'genopedia/images/icon6.png' %}" alt="" /> Medication ({{ searchResult.medication | length }})</h2>
+                            <ul class="search_ul_right">
+                                {% for medication in searchResult.medication %}
+                                    <li>>> {{ medication.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix gap3"></div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+{% load util %}
+<!--How common is this genetic variation?-->
+<div>
+    <h1 class="green_border_txt">{{ title }}
+        <a href="/{{ key }}_block/view/{{ id }}">
+            <i id="text-block-{{ id }}" class="pull-right clickable fa fa-pencil-square-o editable edit-text-block-{{ id }}" aria-hidden="true"></i>
+        </a>
+    </h1>
+    <p class="semibold_txt line_hgt">
+    <p class="m_bot10">Genetic variation can be more or less common in different populations.</p>
+    <div class="row leftPopulation">
+        {% for item in frequency %}
+            {% if item.genotype_count_00 > 0 %}
+                <div class="col-md-12">
+                    <span class="semibold_txt population-name" >{{ item.name }}</span> <span style="display: inline" class="help-block">({{ item.total }} tested)</span>
+                    <a style="cursor: pointer" data-toggle="modal" data-target="#genotype-modal-{{ item.popcode }}">
+                        view all
+                    </a>
+                </div>
+                <div class="col-md-12">
+                    <!-- Genotype | Start-->
+                    <div class="percentg_secs percent-type-{{ item.count_type }}">
+                        <div class="percentg_bar">
+                                {% if item.genotype_count_00 > 0 %}
+                                    <span style="width: {{ item.per_00 }}%" class="per_2 left gennotype_color-1"></span>
+                                {% endif %}
+                                {% if item.genotype_count_01 > 0 %}
+                                    <span style="width: {{ item.per_01 }}%" class="per_2 left gennotype_color-2"></span>
+                                {% endif %}
+                                {% if item.genotype_count_11 > 0 %}
+                                    <span style="width: {{ item.per_11 }}%" class="per_2 left gennotype_color-3"></span>
+                                {% endif %}
+                        </div>
+                        <div class="tooltip-bar">
+                            {% if item.genotype_count_00 > 0 %}
+                                <div class="gennotype_wrapper" style="display: inline">
+                                    <div class="tooltip_s gennotype_border_color-1">
+                                        <div class="tooltip_s_arrow-1 genotype-arrow-color"></div>
+                                        <div class="tooltip_s_inner gennotype_color-1">
+                                            C/C
+                                            <p>{{ item.genotype_count_00|shorter:item.total }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if item.genotype_count_01 > 0 %}
+                                <div class="gennotype_wrapper" style="display: inline">
+                                    <div class="tooltip_s gennotype_border_color-2">
+                                        <div class="tooltip_s_arrow-2 genotype-arrow-color"></div>
+                                        <div class="tooltip_s_inner gennotype_color-2">
+                                            C/T
+                                            <p>{{ item.genotype_count_01|shorter:item.total }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if item.genotype_count_11 > 0 %}
+                                <div class="gennotype_wrapper" style="display: inline">
+                                    <div class="tooltip_s gennotype_border_color-3">
+                                        <div class="tooltip_s_arrow-3 genotype-arrow-color"></div>
+                                        <div class="tooltip_s_inner gennotype_color-3">
+                                            T/T
+                                            <p>{{ item.genotype_count_11|shorter:item.total }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <script>
+                        jQuery(document).ready(function(){
+                            $ = jQuery;
+                            //Show population in leftbar
+                            showPopulation('.leftPopulation .percentg_secs.percent-type-3');
+
+                            //Show population in modal;
+                            $('div[id^="genotype-modal"]').on('shown.bs.modal', function() {
+                               showPopulation('.percentg_secs.percent-type-3',this);
+                            });
+
+                            function showPopulation(selector) {
+                                $(window).resize(function(){
+                                    $(selector).each(function(){
+                                        var bar = $('.percentg_bar',this);
+                                        var firstPercent  = $('.percentg_bar span:first-child',this);
+                                        var secondPercent = $('.percentg_bar span:nth-child(2)',this);
+
+                                        var firstTooltip = $('.gennotype_wrapper:nth-child(1) .tooltip_s',this);
+                                        var secondTooltip = $('.gennotype_wrapper:nth-child(2) .tooltip_s',this);
+                                        var thirdTooltip = $('.gennotype_wrapper:nth-child(3) .tooltip_s',this);
+
+                                        var middle = firstPercent.width()+secondPercent.width()/2
+
+                                        if (middle > (firstTooltip.width()+secondTooltip.width()/2)) {
+                                            margin  = firstPercent.width() + secondPercent.width()/2-firstTooltip.width() -secondTooltip.width()/2;
+                                            if (middle > (bar.width()-secondTooltip.width()/2 - thirdTooltip.width())) {
+                                                $('.gennotype_wrapper:nth-child(2) .tooltip_s',this).css('float','right');
+                                            } else {
+                                                $('.gennotype_wrapper:nth-child(2) .tooltip_s',this).css('margin-left',margin);
+                                            }
+                                        }
+                                    });
+                                }).trigger('resize');
+
+                            }
+
+
+                        });
+                    </script>
+                    <!-- Genotype | End -->
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- Genotype Sub | Start -->
+    {% for data in frequency %}
+        {% if data.genotype_count_00 > 0 %}
+            <div class="modal fade" id="genotype-modal-{{data.popcode}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document" style="width: 80%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{data.name}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% for item in data.sub %}
+                                <div class="genotype-header">
+                                    <span class="semibold_txt population-name">{{ item.name }}</span> <span style="display: inline" class="help-block">({{item.total}} tested)</span>
+                                </div>
+                                <div class="percentg_secs percent-type-{{ item.count_type }}">
+                                    <div class="percentg_bar">
+                                            {% if item.genotype_count_00 > 0 %}
+                                                <span style="width: {{ item.per_00 }}%" class="per_2 left gennotype_color-1"></span>
+                                            {% endif %}
+                                            {% if item.genotype_count_01 > 0 %}
+                                                <span style="width: {{ item.per_01 }}%" class="per_2 left gennotype_color-2"></span>
+                                            {% endif %}
+                                            {% if item.genotype_count_11 > 0 %}
+                                                <span style="width: {{ item.per_11 }}%" class="per_2 left gennotype_color-3"></span>
+                                            {% endif %}
+                                    </div>
+                                    <div class="tooltip-bar">
+                                        {% if item.genotype_count_00 > 0 %}
+                                            <div class="gennotype_wrapper" style="display: inline">
+                                                <div class="tooltip_s gennotype_border_color-1">
+                                                    <div class="tooltip_s_arrow-1 genotype-arrow-color"></div>
+                                                    <div class="tooltip_s_inner gennotype_color-1">
+                                                        C/C
+                                                        <p>{{ item.genotype_count_00|shorter:item.total }}%</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if item.genotype_count_01 > 0 %}
+                                            <div class="gennotype_wrapper" style="display: inline">
+                                                <div class="tooltip_s gennotype_border_color-2">
+                                                    <div class="tooltip_s_arrow-2 genotype-arrow-color"></div>
+                                                    <div class="tooltip_s_inner gennotype_color-2">
+                                                        C/T
+                                                        <p>{{ item.genotype_count_01|shorter:item.total }}%</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if item.genotype_count_11 > 0 %}
+                                            <div class="gennotype_wrapper" style="display: inline">
+                                                <div class="tooltip_s gennotype_border_color-3">
+                                                    <div class="tooltip_s_arrow-3 genotype-arrow-color"></div>
+                                                    <div class="tooltip_s_inner gennotype_color-3">
+                                                        T/T
+                                                        <p>{{ item.genotype_count_11|shorter:item.total }}%</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="buttn" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <!-- Genotype Sub | End -->
+    </p>
+</div>
+<br/>

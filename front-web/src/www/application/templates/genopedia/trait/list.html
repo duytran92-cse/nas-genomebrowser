@@ -1,0 +1,77 @@
+{% load static %}
+<div class="banner_new_bg">
+    <div class="banner_n banner_fill">
+        <div class="container">
+            <div class="inner_banner inner_banner_2">
+                <div class="heading_s_left heading_s green-border-btm">
+                    <img src="{% static 'genopedia/images/icon1.png' %}" alt="" /><span> <strong>{{ total_matched }}</strong> Traits</span>
+                </div>
+                <div id="variations-list" class="banner_c not-margin">
+                    <div class="row" style="min-height: 500px">
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="nav nav-tabs list-letters">
+                                <li class="alphabets {% if 'all' == current_letter %}letter-active{% endif %}" style="width: 34.4px;">
+                                    <a href="?page=1&lt=all" class="alphabets-letter">
+                                        ALL
+                                    </a>
+                                </li>
+                                {% for a in alphabet %}
+                                    <li class="alphabets {% if a == current_letter %}letter-active{% endif %}" style="width: 34.4px;">
+                                        <a href="?page=1&lt={{ a }}" class="alphabets-letter">
+                                            {{ a|upper }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Display Not Found -->
+                        {% if total_matched == 0 %}
+                            <div class="col-md-12 col-sm-12">
+                                <div class="well text-center well-lg lead">Not found any <b>{{ current_letter|upper }}</b></div>
+                            </div>
+                        {% endif %}
+                        <!-- /Display Not Found -->
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="listData_ul">
+                                {% for record in records %}
+                                    <li>
+                                        <a href="/trait/{{ record.title }}"><span style="min-width:18%;display:inline-block;font-size:16px;">
+                                            » {{ record.title }}
+                                        </span></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Paging -->
+                        {% if total_matched and total_matched > 0 %}
+                        <div class="col-md-12 col-sm-12">
+                            <div class="text-center">
+                                <ul class="pagination pagination-sm pagination-list">
+                                    <li>
+                                        <a href="?page=1&lt={{ current_letter }}" class="previous {% if current_page == 1 %}disabled{% endif %}"><span>&lt;&lt;</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="{% if current_page == 1 %}#{% else %}?page={{ previous_page }}&lt={{ current_letter }}{% endif %}" class="previous {% if current_page == 1 %}disabled{% endif %}"><span>&lt;</span></a>
+                                    </li>
+                                    {% for i in pages_range %}
+                                        <li class="{% if current_page == i %}active{% endif %}">
+                                            <a href="?page={{ i }}"><span>{{ i }}</span></a>
+                                        </li>
+                                    {% endfor %}
+                                    <li>
+                                        <a href="{% if current_page == total_pages %}#{% else %}?page={{ next_page }}&lt={{ current_letter }}{% endif %}" class="{% if current_page == total_pages %}disabled{% endif %}"><span>&gt;</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="?page={{ total_pages }}&lt={{ current_letter }}" class="{% if current_page == total_pages %}disabled{% endif %}"><span>&gt;&gt;</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- /Paging -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

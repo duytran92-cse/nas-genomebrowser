@@ -1,0 +1,7 @@
+FROM registry.novogenialab.com/notasquare-zero/images/nas-urad-api:0.1
+
+
+# Python lib
+RUN pip install PyJWT
+RUN pip install pika
+ENV APP_ENV dev

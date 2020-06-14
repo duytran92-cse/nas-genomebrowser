@@ -1,0 +1,14 @@
+<div>
+	<span>
+		<h1 class="green_border_txt">{{ title }}
+			<a href="/{{ key }}_block/view/{{ id }}">
+				<i id="text-block-{{ id }}" class="pull-right clickable fa fa-pencil-square-o editable edit-text-block-{{ id }}" aria-hidden="true"></i>
+			</a>
+		</h1>
+	</span>
+	<div class="text-block-13">
+    	{% for item in alias %}
+          <b style="color: #0b1c47">»  {{ item.alias }}</b> <br>
+        {% endfor %}
+    </div>
+</div>

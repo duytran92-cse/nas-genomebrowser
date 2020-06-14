@@ -1,0 +1,258 @@
+{% load static %}
+<div class="banner_new_bg">
+    <div class="banner_n banner_fill">
+        <div class="container">
+            <div class="inner_banner inner_banner_2">
+                <div class="heading_s_left heading_s green-border-btm" style="margin-bottom: 35px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{% static 'genopedia/images/icon1.png' %}" alt="" /><span> <strong>{{ total_matched }}</strong> gene</span>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 8px;padding-left: 30%;">
+                           <div class="checkbox checkbox-success checkbox-inline">
+                              <input type="checkbox" id="filter-disease" onchange="filter_gene(event)">
+                              <label for="filter-disease"> Disease </label>
+                          </div>
+                          <div class="checkbox checkbox-success checkbox-inline">
+                             <input type="checkbox" id="filter-publication" onchange="filter_gene(event)">
+                             <label for="filter-publication"> Publications </label>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gene-list" class="banner_c not-margin">
+                    <div class="row" style="min-height: 500px">
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="nav nav-tabs list-letters">
+                                <li class="alphabets {% if 'all' == current_letter %}letter-active{% endif %}" style="width: 34.4px;">
+                                    <a href="?page=1&lt=all" class="alphabets-letter">
+                                        ALL
+                                    </a>
+                                </li>
+                                {% for a in alphabet %}
+                                    <li class="alphabets {% if a == current_letter %}letter-active{% endif %}" style="width: 34.4px;">
+                                        <a href="?page=1&lt={{ a }}" class="alphabets-letter">
+                                            {{ a|upper }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Display Not Found -->
+                        {% if total_matched == 0 %}
+                            <div class="col-md-12 col-sm-12">
+                                <div class="well text-center well-lg lead">Not found any <b>{{ current_letter|upper }}</b></div>
+                            </div>
+                        {% endif %}
+                        <!-- /Display Not Found -->
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="listData_ul">
+                                {% for record in records %}
+                                    <li>
+                                        <a href="/gene/{{ record.title }}"><span style="min-width:18%;display:inline-block;font-size:16px;">
+                                            » {{ record.title }}
+                                        </span></a>
+                                        <a class="associated" style="{% if record.associated_diseases_group_name|length == 0 %} pointer-events:none;color:#E0E0E0 {% endif %}" data-toggle="popover" data-placement="bottom" data-content="
+                                            <ul>
+                                                {% for disease_name in record.associated_diseases_group_name %}
+                                                <li>
+                                                    <a href='/disease/{{ disease_name }}' target='_blank'> » {{ disease_name }}</a>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>"
+                                        class="gene-exinfo" data-original-title="" title="">disease</a>
+                                        <a class="associated" style="{% if record.associated_publications|length == 0 %} pointer-events:none;color:#E0E0E0 {% endif %}" data-toggle="popover" data-placement="bottom" data-content="
+                                            <table class='table talbe-striped'>
+                                              <tbody>
+                                                {% for pubication in record.associated_publications %}
+                                                    <tr>
+                                                        <td><a href='https://www.ncbi.nlm.nih.gov/pubmed/{{ pubication.pmid }}'>{{ pubication.pmid }}</a></td>
+                                                        <td>{{ pubication.title }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                          </table>"
+                                        class="gene-exinfo" data-original-title="" title="">publication</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Paging -->
+                        {% if total_matched and total_matched > 0 %}
+                        <div class="col-md-12 col-sm-12">
+                            <div class="text-center">
+                                <ul class="pagination pagination-sm pagination-list">
+                                    <li>
+                                        <a href="?page=1&lt={{ current_letter }}" class="previous {% if current_page == 1 %}disabled{% endif %}"><span>&lt;&lt;</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="{% if current_page == 1 %}#{% else %}?page={{ previous_page }}&lt={{ current_letter }}{% endif %}" class="previous {% if current_page == 1 %}disabled{% endif %}"><span>&lt;</span></a>
+                                    </li>
+                                    {% for i in pages_range %}
+                                        <li class="{% if current_page == i %}active{% endif %}">
+                                            <a href="?page={{ i }}"><span>{{ i }}</span></a>
+                                        </li>
+                                    {% endfor %}
+                                    <li>
+                                        <a href="{% if current_page == total_pages %}#{% else %}?page={{ next_page }}&lt={{ current_letter }}{% endif %}" class="{% if current_page == total_pages %}disabled{% endif %}"><span>&gt;</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="?page={{ total_pages }}&lt={{ current_letter }}" class="{% if current_page == total_pages %}disabled{% endif %}"><span>&gt;&gt;</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- /Paging -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+        var query_string = location.search.substring(1);
+        if (query_string.includes('isDisease')) {
+            jQuery('#filter-disease').prop('checked', true);
+        }
+        if (query_string.includes('isPub')) {
+            jQuery('#filter-publication').prop('checked', true);
+        }
+
+    });
+    function filter_gene(event) {
+        event.preventDefault();
+        var isDisease = jQuery('#filter-disease').prop("checked");
+        var isPub = jQuery('#filter-publication').prop("checked");
+        var key = '';
+        var query_string = location.search.substring(1);
+        if (query_string.includes('page')) {
+            var page = getUrlVars()["page"];
+            key="page="+ page;
+        }
+        if (query_string.includes('lt')){
+            var lt = getUrlVars()["lt"];
+            if (key != '') {
+                key+= '&lt='+ lt;
+            }
+            else {
+                key= 'lt='+ lt;
+            }
+        }
+        if (isDisease == 1) {
+            if (key == '') {
+                key+= 'isDisease';
+            }
+            else {
+                key+= '&&isDisease';
+            }
+
+        }
+        if (isPub == 1) {
+            if (key == '') {
+                key+= 'isPub';
+            }
+            else {
+                key+= '&&isPub';
+            }
+        }
+        if (key != '') {
+            location.href= "?"+ key;
+        }
+        else {
+            location.href="/gene/list";
+        }
+    }
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+        function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+    }
+</script>
+<style>
+.checkbox {
+  padding-left: 20px; }
+  .checkbox label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px; }
+    .checkbox label::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: 0;
+      margin-left: -20px;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      background-color: #fff;
+      -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+      -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+      transition: border 0.15s ease-in-out, color 0.15s ease-in-out; }
+    .checkbox label::after {
+      display: inline-block;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 0;
+      top: 0;
+      margin-left: -20px;
+      padding-left: 3px;
+      padding-top: 1px;
+      font-size: 11px;
+      color: #555555; }
+  .checkbox input[type="checkbox"] {
+    opacity: 0; }
+    .checkbox input[type="checkbox"]:focus + label::before {
+      outline: thin dotted;
+      outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px; }
+    .checkbox input[type="checkbox"]:checked + label::after {
+      font-family: 'FontAwesome';
+      content: "\f00c"; }
+    .checkbox input[type="checkbox"]:disabled + label {
+      opacity: 0.65; }
+      .checkbox input[type="checkbox"]:disabled + label::before {
+        background-color: #eeeeee;
+        cursor: not-allowed; }
+  .checkbox.checkbox-circle label::before {
+    border-radius: 50%; }
+  .checkbox.checkbox-inline {
+    margin-top: 0; }
+
+.checkbox-primary input[type="checkbox"]:checked + label::before {
+  background-color: #428bca;
+  border-color: #428bca; }
+.checkbox-primary input[type="checkbox"]:checked + label::after {
+  color: #fff; }
+
+.checkbox-danger input[type="checkbox"]:checked + label::before {
+  background-color: #d9534f;
+  border-color: #d9534f; }
+.checkbox-danger input[type="checkbox"]:checked + label::after {
+  color: #fff; }
+
+.checkbox-info input[type="checkbox"]:checked + label::before {
+  background-color: #5bc0de;
+  border-color: #5bc0de; }
+.checkbox-info input[type="checkbox"]:checked + label::after {
+  color: #fff; }
+
+.checkbox-warning input[type="checkbox"]:checked + label::before {
+  background-color: #f0ad4e;
+  border-color: #f0ad4e; }
+.checkbox-warning input[type="checkbox"]:checked + label::after {
+  color: #fff; }
+
+.checkbox-success input[type="checkbox"]:checked + label::before {
+  background-color: #5cb85c;
+  border-color: #5cb85c; }
+.checkbox-success input[type="checkbox"]:checked + label::after {
+  color: #fff; }
+</style>

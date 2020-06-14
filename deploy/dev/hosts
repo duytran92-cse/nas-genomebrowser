@@ -1,0 +1,4 @@
+# Genome Browser
+127.0.0.1         genome-browser-api.genopedia.local
+127.0.0.1         genome-browser-admin.genopedia.local
+127.0.0.1         genome-browser-front.genopedia.local

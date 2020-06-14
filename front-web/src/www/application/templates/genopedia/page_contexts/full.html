@@ -1,0 +1,371 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Genopedia</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="{% static 'genopedia/images/favicon.ico' %}"  type="image/x-icon">
+        <link rel="icon" href="{% static 'genopedia/images/favicon.ico' %}"  type="image/x-icon">
+        <!-- Stylesheet -->
+        <link href="{% static 'genopedia/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/bootstrap-theme.min.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/font-awesome.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/style.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/responsive.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/fonts/fonts.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/menu.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'genopedia/css/gen-one.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'genopedia/css/gen-two.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'genopedia/css/comment.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'genopedia/css/login.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'genopedia/css/offer.css' %}" rel="stylesheet" type="text/css">
+
+        <!-- jQuery -->
+        <script src="{% static 'genopedia/js/jquery.min.js' %}"></script>
+        <script src="{% static 'genopedia/js/responsive-pagi.js' %}"></script>
+        <script src="{% static 'genopedia/js/blockUI.min.js' %}"></script>
+
+        <!-- React -->
+        <script src="{% static 'genopedia/js/react.min.js' %}"></script>
+        <script src="{% static 'genopedia/js/react-add-on.js' %}"></script>
+        <script src="{% static 'genopedia/js/react-dom.min.js' %}"></script>
+
+        <!--defer load css via javascript-->
+        <script type="text/javascript">
+            var giftofspeed = document.createElement('link');
+            giftofspeed.rel = 'stylesheet';
+            giftofspeed.href = 'http://sequence-viewer-front.gp.test.notasquare.vn/static/material/sequence-browsing/sequence-style.css';
+            giftofspeed.type = 'text/css';
+            var godefer = document.getElementsByTagName('link')[0];
+            godefer.parentNode.insertBefore(giftofspeed, godefer);
+        </script>
+
+        {% block extraHead %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="main_div">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 logo_part">
+                            <a href="/">
+                                <img src="{% static 'genopedia/images/logo.png' %}" alt="Genopedia" title="Genopedia"/>
+                            </a>
+                        </div>
+
+                        <div class="col-md-5 col-sm-5 search_part">
+                            <div class="search_s">
+                                <form action="/search" method="GET">
+                                    <input type="text" name="kw" id="keyword" class="form-control input-lg" placeholder="{% if textblock.search_for %} {{ textblock.search_for|title }} {% else %} Search for {% endif %} Variation, gene, disease, trait, medication"/>
+
+                                    <input type="submit" name="" value="{% if textblock.search %} {{ textblock.search|title}} {% else %} Search {% endif %}" class="submit input-lg"/>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 user_login_part text-right">
+                            <div class="user_name_sec">
+                                <p>
+                                    {% if user_name != '' %}
+                                        <div class="user_pic">
+                                            <a href="{{ user_url }}/user/profile">
+                                                <img src="{% static 'genopedia/images/demo_user1.jpg' %}" class="round_img"/>
+                                            </a>
+                                        </div>
+                                        <div class="user_name_sec">
+                                            <h3>
+                                                <a href="{{ user_url }}/user/profile">{{ user_name }}</a>
+                                            </h3>
+                                            <p>
+                                                <a href="{{ logout }}">Logout</a>
+                                            </p>
+                                        </div>
+                                        <div style="margin-top: 10px">
+                                            {% if private_result %}
+                                                <b>Private Results: </b><span style="color: #95c809">{{ private_result|title }}</span><br>
+                                            {% else %}
+                                                <b>Private Results: </b>off
+                                                <a href="{{ url_upload }}"> <span style="color: #95c809;margin-left: 10px" class="glyphicon glyphicon-upload"></span></a>
+                                                <br>
+                                            {% endif %}
+                                            {% if science_filter %}
+                                                <b>Science Filter: </b>
+                                                {% if science_filter == 'strong' %}
+                                                    <span style="color: #1c8804">
+                                                {% elif science_filter == 'moderate' %}
+                                                    <span style="color: #a92a00">
+                                                {% elif science_filter == 'weak' %}
+                                                    <span style="color: #ea4108">
+                                                {% elif science_filter == 'no' %}
+                                                    <span style="color: #da0707">
+                                                {% endif %}
+                                                  {{ science_filter|title }}
+                                                </span>
+                                                <br>
+                                                <a href="{{ url_filter }}"><span style="font-size: 10px"> &gt;&gt; </span> Change</a>
+                                            {% else %}
+                                                <b>Science Filter: </b>off <br>
+                                                <a href="{{ url_filter }}" style="color: #95c809"><span style="font-size: 10px"> &gt;&gt; </span> Activate</a>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <a role="button" href="{{ login }}">Sign in</a>
+                                        <span> | </span>
+                                        <a role="button" href="{{ sign_up }}">Sign up</a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right" style="margin-top: 30px">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </header>
+            <!-- Navigation -->
+            <nav class="nav-container">
+                <div class="container">
+                    <div class="menu_s">
+                        <a class="toggleMenu" href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <ul class="navi_i">
+                            <li>
+                                <a id="variation" href="/variation/list">Variation</a>
+                            </li>
+                            <li>
+                                <a id="gene" href="/gene/list">Gene</a>
+                            </li>
+                            <li>
+                                <a id="trait" href="/trait/list">Trait</a>
+                            </li>
+                            <li>
+                                <a id="disease" href="/disease/list">Disease</a>
+                            </li>
+                            <li>
+                                <a id="treatment" href="/treatment/list">Treatment</a>
+                            </li>
+                            <!-- GENEBAY -->
+                            <li class="pull-right gb-white">
+                                <a style="line-height: 35px" id="geneBay" href="{{ genebay_url }}">
+                                    <span class="gene-word" style="color: #FFF">GENE</span>
+                                    <span class="bay-word">BAY</span>
+                                </a>
+                            </li>
+
+                            <!--Forum -->
+                            <!-- <li class="pull-right gb-white">
+                                <a style="line-height: 35px" id="forum" href="{{ genebay_url }}">
+                                    <span style="color: #FFF">Gene</span>
+                                    <span class="bay-word">Forum</span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {% block content %}
+                {{ widget_html | safe }}
+            {% endblock %}
+
+            <!-- Footer -->
+            <footer>
+                <div class="bottom">
+                    <div class="container">
+                        <div class="row">
+                            <ul class="bottom_ul">
+                                <li>
+                                    <span>{% if textblock.enter_email %} {{ textblock.enter_email|title }} {% else %} Enter email & subscribe for our newsletter {% endif %}</span>
+                                </li>
+                                <li>
+                                    <div class="newsletter">
+                                        <input id="email-sub" name="email-sub" type="text" value="" class="form-control newslltr_input" placeholder="{% if textblock.enter_email_address %} {{ textblock.enter_email_address|title }} {% else %} Enter email address {% endif %}"/>
+                                        <a id='saveEmailSub' style="cursor:pointer" name="" value="newsletter" class="submit_news"></a>
+                                    </div>
+                                </li>
+                                {% if social_network_url.facebook != '' %}
+                                    <li>
+                                        <a href="{{ social_network_url.facebook }}" class="icons_h facebook"></a>
+                                    </li>
+                                {% endif %}
+                                {% if social_network_url.twitter != '' %}
+                                    <li>
+                                        <a href="{{ social_network_url.twitter }}" class="icons_h twitter"></a>
+                                    </li>
+                                {% endif %}
+                                {% if social_network_url.youtube != '' %}
+                                    <li>
+                                        <a href="{{ social_network_url.youtube }}" class="icons_h youtube"></a>
+                                    </li>
+                                {% endif %}
+                                {% if social_network_url.linkedin != '' %}
+                                    <li>
+                                        <a href="{{ social_network_url.linkedin }}" class="icons_h linkedin"></a>
+                                    </li>
+                                {% endif %}
+                                {% if social_network_url.google_plus != '' %}
+                                    <li>
+                                        <a href="{{ social_network_url.google_plus }}" class="icons_h google_plus"></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="container" style="min-height:220px;margin-top: 30px">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <h3>{% if textblock.navigation %} {{ textblock.navigation|title }} {% else %} Navigation {% endif %}</h3>
+                            <ul>
+                                <li>
+                                    <a href="/variation/list">» Variation</a>
+                                </li>
+                                <li>
+                                    <a href="/gene/list">» Gene</a>
+                                </li>
+                                <li>
+                                    <a href="/trait/list">» Trait</a>
+                                </li>
+                                <li>
+                                    <a href="/disease/list">» Disease</a>
+                                </li>
+                                <li>
+                                    <a href="/treatment/list">» Treatment</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <h3>{% if textblock.contact_us %} {{ textblock.contact_us|title }} {% else %} Contact us {% endif %}</h3>
+                            <p>{{ texts.contact_us | safe }}</p>
+                        </div>
+
+                        <div class="col-md-5 col-sm-5">
+                            <h3>{% if textblock.about_genopedia %} {{ textblock.about_genopedia|title }} {% else %} About genopedia {% endif %}</h3>
+                            <p>{{ texts.about_genopedia | safe }}</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <p>&copy; {% if textblock.copyright_all %} {{ textblock.copyright_all|title }} {% else %}  Copyright all rights reserverd {% endif %}</p>
+                            </div>
+                            <div class="col-md-3 col-sm-3"></div>
+                            <div class="col-md-5 col-sm-5 text-justify">
+                                <ul class="copyright_ul">
+                                    <li>
+                                        <a href="{{frontSetting.impressionUrl}}">{% if textblock.impressum %} {{ textblock.impressum|title }} {% else %}  Impressum {% endif %}</a>
+                                    </li>
+                                    <li>|</li>
+                                    <li>
+                                        <a href="{{frontSetting.termOfUseUrl}}">{% if textblock.term_of_use %} {{ textblock.term_of_use|title }} {% else %}  Term of use {% endif %}</a>
+                                    </li>
+                                    <li>|</li>
+                                    <li>
+                                        <a href="{{frontSetting.privacyPolicyUrl}}">{% if textblock.privacy_policy %} {{ textblock.privacy_policy|title }} {% else %}  Privacy policy {% endif %}</a>
+                                    </li>
+                                    <li>|</li>
+                                    <li>
+                                        <a href="{{frontSetting.copyrightUrl}}">{% if textblock.copyright_policy %} {{ textblock.copyright_policy|title }} {% else %}  Copyright policy {% endif %}</a>
+                                    </li>
+                                    <!-- <li>|</li>
+                                    <li>
+                                        <a href="" role="button" data-toggle='modal' data-target='#contactUsM'>{% if textblock.contact_us %} {{ textblock.contact_us|title }} {% else %}  Contact us {% endif %}</a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+        </div>
+
+        <div class="container" id="lgm"></div>
+        {% include "genopedia/page/contact_us.html" %}
+        <!-- Bootstrap Js -->
+        <script src="{% static 'genopedia/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'genopedia/js/menu.js' %}" type="text/javascript"></script>
+        <script src="http://sequence-viewer-front.gp.test.notasquare.vn/static/material/sequence-browsing/variation-sequence.js" defer></script>
+        <script src="http://sequence-viewer-front.gp.test.notasquare.vn/static/material/sequence-browsing/gene-sequence.js" defer></script>
+        <script src = "http://sequence-viewer-front.gp.test.notasquare.vn/static/material/sequence-browsing/libs/react/react.js" defer></script>
+        <script src = "http://sequence-viewer-front.gp.test.notasquare.vn/static/material/sequence-browsing/libs/react/react-dom.js" defer></script>
+
+        <script type="text/javascript">
+            jQuery("document").ready(function() {
+                // Handle Bootstrap Popup toggle
+
+                $('[data-toggle="popover"]').popover({ html : true });
+                $('.associated').on('click', function (e) {
+                    $('.associated').not(this).popover('hide');
+                });
+                $('body').click(function(e) {
+                    if ($(e.target).data('toggle') !== 'popover'
+                        && $(e.target).parents('.popover.in').length === 0) {
+                        $('[data-toggle="popover"]').popover('hide');
+                    }
+                });
+                // End-Handle Bootstrap Popup toggle
+                var loading = "{% static 'genopedia/images/gif/ajax-loader.gif' %}";
+                jQuery(window).scroll(function() {
+                    if (jQuery(this).scrollTop() > 136) {
+                        jQuery('.nav-container').addClass("f_nav");
+                    } else {
+                        jQuery('.nav-container').removeClass("f_nav");
+                    }
+                });
+                jQuery('#saveEmailSub').click(function() {
+                    var email = jQuery('#email-sub').val();
+                    var root = this;
+                    var formData = new FormData();
+                    if (email.trim() != '') {
+                        jQuery("body").block({
+                            message: "<img src=" + loading + " />",
+                            css: {
+                                border: 'none',
+                                backgroundColor: 'transparent',
+                                color: '#fff',
+                                zIndex: '10600',
+                                paddingTop: '50px'
+                            },
+                            fadeIn: 0,
+                            fadeOut: 0,
+                            overlayCSS: {
+                                cursor: 'wait'
+                            }
+                        });
+                        formData.append('email', email);
+                        (function(root) {
+                            jQuery.ajax({
+                                type: "post",
+                                dataType: 'json',
+                                url: '/email_subscribe',
+                                data: formData,
+                                cache: false,
+                                processData: false,
+                                contentType: false,
+                                success: function(result) {
+                                    jQuery('body').unblock();
+                                    var email = jQuery('#email-sub').val('');
+                                },
+                                error: function(result) {}
+                            });
+                        }(root));
+                    }
+                });
+            });
+        </script>
+
+    </body>
+</html>

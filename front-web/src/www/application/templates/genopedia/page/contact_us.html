@@ -1,0 +1,65 @@
+<div class="container">
+	<!-- Modal -->
+	<div class="modal fade" id="contactUsM" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4>Contact Us</h4>
+				</div>
+				<div class="modal-body" style="padding: 15px 60px">
+					<div class="form-group">
+						<label>Email</label>
+						<input type="text" name="email-contact" id="email-contact" class="form-control shadow no-radius" id="email-contactUs" placeholder="Enter email">
+					</div>
+					<div class="form-group">
+						<label>Message</label>
+						<textarea rows="5" class="form-control shadow no-radius" id="message-contact" placeholder="Message"></textarea>
+					</div>
+					<button id="btn-send-contactUs" class="buttn2 btn-sm btn-green">Send</button>
+				</div>
+				<div class="modal-footer">
+					<p class="pull-left hidden" id="mess-res-contactUs" style="color:red">
+						Please enter email !</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	jQuery(document).ready(function() {
+		jQuery('#btn-send-contactUs').click(function() {
+			var email = jQuery('#email-contact').val();
+			var message = jQuery('#message-contact').val();
+			if (email.trim() == '') {
+				jQuery('#mess-res-contactUs').removeClass('hidden');
+				jQuery('#email-contact').focus();
+			} else {
+				jQuery('#mess-res-contactUs').addClass('hidden');
+				var formData = new FormData();
+				formData.append('email', email);
+				formData.append('message', message);
+				jQuery.ajax({
+					type: "post",
+					dataType: 'json',
+					url: "/send_message_contact_us",
+					data: formData,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function(result) {
+						if (result == 1) {
+							jQuery('#mess-res-contactUs').addClass('hidden').html('Please enter email!');
+							jQuery('#contactUsM').modal('hide');
+						} else {
+							jQuery('#mess-res-contactUs').removeClass('hidden').html('Failed! Please try again.');
+						}
+					},
+					error: function(result) {}
+				});
+			}
+		});
+	});
+</script>

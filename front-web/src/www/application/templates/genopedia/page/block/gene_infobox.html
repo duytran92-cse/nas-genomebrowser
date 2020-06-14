@@ -1,0 +1,50 @@
+<div>
+    <span>
+        <h1 class="green_border_txt">{{ title }}
+            <a href="/{{ key }}_block/view/{{ id }}">
+                <i id="text-block-{{ id }}" class="pull-right clickable fa fa-pencil-square-o editable edit-text-block-{{ id }}" aria-hidden="true"></i>
+            </a>
+        </h1>
+    </span>
+    <!-- <h1 class="green_border_txt">{{ title }}</h1> -->
+    <div class="risk_secs">
+        <div class="innertable">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bold_txt">Chromosome</th>
+                        <th class="bold_txt">Start</th>
+                        <th class="bold_txt">End</th>
+                        <th class="bold_txt">Number of exons</th>
+                        <th class="bold_txt">Protein products</th>
+                        <th class="bold_txt">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for info in infoboxs %}
+                        <tr>
+                            <td style="width:10%">
+                                <p> {{ info.chromosome }} </p>
+                            </td>
+                            <td>
+                                <p> {{ info.start }} </p>
+                            </td>
+                            <td>
+                                <p> {{ info.end }} </p>
+                            </td>
+                            <td>
+                                <p> {{ info.number_of_exons }} </p>
+                            </td>
+                            <td>
+                                <p> {{ info.protein_products }} </p>
+                            </td>
+                            <td>
+                                <p> {{ info.description }} </p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

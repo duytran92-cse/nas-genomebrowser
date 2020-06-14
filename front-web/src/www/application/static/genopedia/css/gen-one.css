@@ -1,0 +1,633 @@
+.chromName {
+    position: absolute;
+    left: 45px;
+    top: 30px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #FFF;
+}
+
+/*.contentChrom{
+    padding: 20px 0px 0 40px;
+    position: relative;
+    min-height: 650px;
+    width: 100%;
+  }*/
+
+.inner_con_banner {
+    position: relative;
+}
+.imgChrom {
+    max-width: 100%;
+}
+div[class^="chrom"] {
+    z-index: 10;
+    cursor: pointer;
+    position: absolute;
+    /*background: rgba(0, 0, 0, 0.5);*/
+    /*border: 1px dotted #000;*/
+}
+.chromLeft {
+    top: 69px;
+    left: 43px;
+    width: 72px;
+    height: 201px;
+    /*background: rgba(0, 0, 0, 0.5) !important;*/
+}
+.chromRight {
+    top: 69px;
+    left: 138px;
+    width: 74px;
+    height: 201px;
+    /*background: rgba(0, 0, 0, 0.5) !important;*/
+}
+.chrom1 {
+    top: 137px;
+    left: 322px;
+    /*height: 116px;*/
+    width: 90px;
+    /*transform: rotate(60deg);*/
+}
+.chrom2 {
+    top: 205px;
+    left: 375px;
+    /*height: 40px;*/
+    width: 35px;
+    /*transform: rotate(63deg);*/
+}
+.chrom3 {
+    top: 215px;
+    left: 450px;
+    /*height: 85px;*/
+    width: 65px;
+    /*transform: rotate(42deg);*/
+}
+.chrom4 {
+    top: 195px;
+    left: 530px;
+    /*height: 57px;*/
+    width: 27px;
+    /*transform: rotate(-27deg);*/
+}
+.chrom5 {
+    top: 220px;
+    left: 575px;
+    /*height: 25px;*/
+    width: 25px;
+}
+.chrom6 {
+    top: 155px;
+    left: 590px;
+    /*height: 64px;*/
+    width: 45px;
+    /*transform: rotate(-24deg);*/
+}
+.chrom7 {
+    top: 230px;
+    left: 650px;
+    /*height: 55px;*/
+    width: 35px;
+    /*transform: rotate(30deg);*/
+}
+.chrom8 {
+    top: 175px;
+    left: 720px;
+    /*height: 56px;*/
+    width: 55px;
+    /*transform: rotate(54deg);*/
+}
+.chrom9 {
+    top: 240px;
+    left: 710px;
+    /*height: 28px;*/
+    width: 30px;
+    /*transform: rotate(-46deg);*/
+}
+.chrom10 {
+    top: 237px;
+    left: 790px;
+    /*height: 36px;*/
+    width: 24px;
+    /*transform: rotate(-9deg);*/
+}
+.chrom11 {
+    top: 150px;
+    left: 835px;
+    /*height: 59px;*/
+    width: 55px;
+    /*transform: rotate(31deg);*/
+}
+.chrom12 {
+    top: 165px;
+    left: 880px;
+    /*height: 37px;*/
+    width: 55px;
+    /*transform: rotate(112deg);*/
+}
+.chrom13 {
+    top: 170px;
+    left: 813px;
+    /*height: 41px;*/
+    width: 25px;
+    /*transform: rotate(17deg);*/
+}
+.chrom14 {
+    top: 30px;
+    left: 380px;
+    /*height: 71px;*/
+    width: 50px;
+    /*transform: rotate(-34deg);*/
+}
+.chrom15 {
+    top: 135px;
+    left: 770px;
+    /*height: 33px;*/
+    width: 30px;
+    /*transform: rotate(16deg);*/
+}
+.chrom16 {
+    top: 100px;
+    left: 726px;
+    /*height: 57px;*/
+    width: 35px;
+    /*transform: rotate(-25deg);*/
+}
+.chrom17 {
+    top: 130px;
+    left: 675px;
+    /*height: 27px;*/
+    width: 28px;
+    /*transform: rotate(0deg);*/
+}
+.chrom18 {
+    top: 125px;
+    left: 533px;
+    /*height: 65px;*/
+    width: 50px;
+    /*transform: rotate(25deg);*/
+}
+.chrom19 {
+    top: 180px;
+    left: 785px;
+    /*height: 40px;*/
+    width: 28px;
+    /*transform: rotate(25deg);*/
+}
+.chrom20 {
+    top: 66px;
+    left: 440px;
+    /*height: 54px;*/
+    width: 50px;
+    /*transform: rotate(-54deg);*/
+}
+.chrom21 {
+    top: 185px;
+    left: 666px;
+    /*height: 40px;*/
+    width: 45px;
+    /*transform: rotate(83deg);*/
+}
+.chrom22 {
+    top: 155px;
+    left: 470px;
+    /*height: 70px;*/
+    width: 55px;
+    /*transform: rotate(46deg);*/
+}
+.chrom23 {
+    top: 120px;
+    left: 428px;
+    /*height: 74px;*/
+    width: 35px;
+    /*transform: rotate(1deg);*/
+}
+.chrom24 {
+    top: 98px;
+    left: 628px;
+    /*height: 53px;*/
+    width: 17px;
+    /*transform: rotate(-3deg);*/
+}
+.chrom25 {
+    top: 55px;
+    left: 788px;
+    /*height: 92px;*/
+    width: 95px;
+    /*transform: rotate(-34deg);*/
+}
+div[class^="connector"] {
+    position: absolute;
+    background: #FFF;
+    width: 1px;
+    cursor: pointer;
+    z-index: 10;
+}
+.connector-chrom1 {
+    top: 194px;
+    left: 275px;
+    height: 50px;
+    transform: rotate(60deg);
+}
+.connector-chrom2 {
+    top: 219px;
+    left: 340px;
+    height: 58px;
+    transform: rotate(60deg);
+}
+.connector-chrom3 {
+    top: 255px;
+    left: 430px;
+    height: 58px;
+    transform: rotate(66deg);
+}
+.connector-chrom4 {
+    top: 255px;
+    left: 524px;
+    height: 58px;
+    transform: rotate(46deg);
+}
+.connector-chrom5 {
+    top: 270px;
+    left: 575px;
+    height: 45px;
+    transform: rotate(14deg);
+}
+.connector-chrom6 {
+    top: 246px;
+    left: 603px;
+    height: 45px;
+    transform: rotate(17deg);
+}
+.connector-chrom7 {
+    top: 275px;
+    left: 680px;
+    height: 35px;
+    transform: rotate(-13deg);
+}
+.connector-chrom8 {
+    top: 210px;
+    left: 742px;
+    height: 65px;
+    transform: rotate(-13deg);
+}
+.connector-chrom9 {
+    top: 270px;
+    left: 736px;
+    height: 50px;
+    transform: rotate(-13deg);
+}
+.connector-chrom10 {
+    top: 260px;
+    left: 806px;
+    height: 50px;
+    transform: rotate(-16deg);
+}
+.connector-chrom11 {
+    top: 211px;
+    left: 869px;
+    height: 35px;
+    transform: rotate(-50deg);
+}
+.connector-chrom12 {
+    top: 191px;
+    left: 920px;
+    height: 86px;
+    transform: rotate(-32deg);
+}
+.connector-chrom13 {
+    top: 95px;
+    left: 864px;
+    height: 105px;
+    transform: rotate(45deg);
+}
+.connector-chrom14 {
+    top: 60px;
+    left: 374px;
+    height: 47px;
+    transform: rotate(61deg);
+}
+.connector-chrom15 {
+    top: 85px;
+    left: 770px;
+    height: 80px;
+    transform: rotate(-13deg);
+}
+.connector-chrom16 {
+    top: 93px;
+    left: 719px;
+    height: 30px;
+    transform: rotate(-13deg);
+}
+.connector-chrom17 {
+    top: 77px;
+    left: 678px;
+    height: 65px;
+    transform: rotate(-35deg);
+}
+.connector-chrom18 {
+    top: 78px;
+    left: 555px;
+    height: 65px;
+    transform: rotate(-8deg);
+}
+.connector-chrom19 {
+    top: 218px;
+    left: 805px;
+    height: 37px;
+    transform: rotate(-25deg);
+}
+.connector-chrom20 {
+    top: 58px;
+    left: 443px;
+    height: 25px;
+    transform: rotate(-27deg);
+}
+.connector-chrom21 {
+    top: 210px;
+    left: 654px;
+    height: 112px;
+    transform: rotate(9deg);
+}
+.connector-chrom22 {
+    top: 130px;
+    left: 518px;
+    height: 35px;
+    transform: rotate(5deg);
+}
+.connector-chrom23 {
+    top: 185px;
+    left: 435px;
+    height: 48px;
+    transform: rotate(37deg);
+}
+.connector-chrom24 {
+    top: 96px;
+    left: 619px;
+    height: 37px;
+    transform: rotate(-46deg);
+}
+.connector-chrom25 {
+    top: 67px;
+    left: 832px;
+    height: 31px;
+    transform: rotate(43deg);
+}
+.connector-organ-0 {
+    top: 0px;
+    left: 1250px;
+    height: 44px;
+    transform: rotate(90deg);
+}
+.connector-organ-1 {
+    top: 70px;
+    left: 1275px;
+    height: 74px;
+    transform: rotate(90deg);
+}
+.connector-organ-2 {
+    top: 11px;
+    left: 1185px;
+    height: 50px;
+    transform: rotate(90deg);
+}
+.connector-organ-3 {
+    top: -7px;
+    left: 1262px;
+    height: 90px;
+    transform: rotate(90deg);
+}
+.connector-organ-4 {
+    top: 39px;
+    left: 1195px;
+    height: 55px;
+    transform: rotate(90deg);
+}
+.connector-organ-5 {
+    top: 21px;
+    left: 1245px;
+    height: 54px;
+    transform: rotate(90deg);
+}
+.connector-organ-13 {
+    top: 45px;
+    left: 1275px;
+    height: 85px;
+    transform: rotate(90deg);
+}
+.connector-organ-6 {
+    top: 65px;
+    left: 1175px;
+    height: 55px;
+    transform: rotate(90deg);
+}
+.connector-organ-8 {
+    top: 89px;
+    left: 1273px;
+    height: 100px;
+    transform: rotate(90deg);
+}
+.connector-organ-9 {
+    top: 101px;
+    left: 1164px;
+    height: 80px;
+    transform: rotate(90deg);
+}
+.connector-organ-7 {
+    top: 134px;
+    left: 1180px;
+    height: 64px;
+    transform: rotate(90deg);
+}
+.connector-organ-10 {
+    top: 181px;
+    left: 1273px;
+    height: 45px;
+    transform: rotate(90deg);
+}
+.connector-organ-11 {
+    top: 240px;
+    left: 1280px;
+    height: 45px;
+    transform: rotate(90deg);
+}
+.connector-organ-12 {
+    top: 190px;
+    left: 1177px;
+    height: 45px;
+    transform: rotate(90deg);
+}
+div[class^='connector-text'] {
+    position: absolute;
+    background: transparent;
+    font-size: 12px;
+    color: #FFF;
+    width: 56px;
+}
+.connector-text-chrom {
+    top: 225px;
+    left: 180px;
+    width: 105px !important;
+}
+.connector-text-chrom1 {
+    top: 235px;
+    left: 230px;
+}
+.connector-text-chrom2 {
+    top: 262px;
+    left: 307px;
+}
+.connector-text-chrom3 {
+    top: 295px;
+    left: 345px;
+}
+.connector-text-chrom4 {
+    top: 305px;
+    left: 495px;
+}
+.connector-text-chrom5 {
+    top: 315px;
+    left: 560px;
+}
+.connector-text-chrom6 {
+    top: 290px;
+    left: 589px;
+}
+.connector-text-chrom7 {
+    top: 313px;
+    left: 675px;
+}
+.connector-text-chrom8 {
+    top: 274px;
+    left: 745px;
+}
+.connector-text-chrom9 {
+    top: 320px;
+    left: 735px;
+}
+.connector-text-chrom10 {
+    top: 308px;
+    left: 809px;
+}
+.connector-text-chrom11 {
+    top: 240px;
+    left: 855px;
+}
+.connector-text-chrom12 {
+    top: 269px;
+    left: 938px;
+}
+.connector-text-chrom13 {
+    top: 91px;
+    left: 896px;
+}
+.connector-text-chrom14 {
+    top: 92px;
+    left: 292px;
+}
+.connector-text-chrom15 {
+    top: 68px;
+    left: 701px;
+}
+.connector-text-chrom16 {
+    top: 75px;
+    left: 659px;
+}
+.connector-text-chrom17 {
+    top: 69px;
+    left: 597px;
+}
+.connector-text-chrom18 {
+    top: 63px;
+    left: 490px;
+}
+.connector-text-chrom19 {
+    top: 253px;
+    left: 809px;
+}
+.connector-text-chrom20 {
+    top: 41px;
+    left: 431px;
+}
+.connector-text-chrom21 {
+    top: 321px;
+    left: 638px;
+}
+.connector-text-chrom22 {
+    top: 113px;
+    left: 514px;
+}
+.connector-text-chrom23 {
+    top: 228px;
+    left: 413px;
+}
+.connector-text-chrom24 {
+    top: 87px;
+    left: 546px;
+}
+.connector-text-chrom25 {
+    top: 55px;
+    left: 838px;
+}
+.connector-text-genPairInfo {
+    top: 80px;
+    left: 220px;
+}
+.connector-text-genPairInfo> p {
+    width: 100px;
+}
+.connector-text-organ-0 {
+    top: 11px;
+    right: 530px;
+}
+.connector-text-organ-2 {
+    top: 25px;
+    right: 673px;
+}
+.connector-text-organ-1 {
+    top: 95px;
+    right: 490px;
+}
+.connector-text-organ-3 {
+    top: 29px;
+    right: 498px;
+}
+.connector-text-organ-4 {
+    top: 48px;
+    right: 680px;
+}
+.connector-text-organ-5 {
+    top: 39px;
+    right: 534px;
+}
+.connector-text-organ-13 {
+    top: 76px;
+    right: 485px;
+}
+.connector-text-organ-6 {
+    top: 80px;
+    right: 690px;
+}
+.connector-text-organ-8 {
+    top: 127px;
+    right: 477px;
+}
+.connector-text-organ-9 {
+    top: 120px;
+    right: 730px;
+}
+.connector-text-organ-7 {
+    top: 155px;
+    right: 700px;
+}
+.connector-text-organ-10 {
+    top: 195px;
+    right: 506px;
+}
+.connector-text-organ-11 {
+    top: 252px;
+    right: 500px;
+}
+.connector-text-organ-12 {
+    top: 200px;
+    right: 685px;
+}

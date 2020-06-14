@@ -1,0 +1,141 @@
+{% load static %}
+{% static "" as baseUrl %}
+{% if error %}
+<div class="banner_new_bg">
+    <div class="banner_n banner_fill">
+        <div class="container">
+            <div class="inner_banner">
+                <div class="heading_p">
+                    <h1>{{ error }}</h1>
+                </div>
+                <div class="banner_c_search">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <img src="{% static 'genopedia/images/search_img.jpg' %}" alt="">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<style>
+.static-div-sequence {
+  height: 300px !important;
+  padding-top: 20px !important ;
+  position: static !important;
+}
+
+</style>
+
+<!-- Include squences -->
+    {% if page == "variation" %}
+    <!-- Sequences browser -->
+    <div class="banner_new_bg2">
+      <div class="con_banner">
+          <div class="images_secs" style="padding: 0 205px;">
+                <img src="{{ baseUrl }}/genopedia/images/chromosome_highlight/big_img_c{{ info_banner.chromosome }}.png" alt="">
+                <div class="dropdown" style="cursor:pointer;z-index:100;margin-top: 86px;position: absolute;margin-left: 5px;width: 175px;height: 200px;left: 30px;">
+                  <div class="dropdown-content">
+                    <p> Chromosome: {{ info_banner.chromosome }} </p>
+                    <p> Genes: {{ info_banner.genename }} </p>
+                    <p> Variation: {{ entity }} </p>
+                  </div>
+                </div>
+                {% for i in lst_chromosome %}
+                <div class="dropdown chro-{{i}}">
+                  <div class="dropdown-content transform-none-chro-{{ i }}">
+                    <p> Chromosome {{ i }} </p>
+                  </div>
+                </div>
+                {% endfor %}
+                <div class="inner_con_banner">
+                      <div id="sequence-browser-variation" class="static-div-sequence"></div>
+                      <script>
+                      	// ---> insert try...catch clause to block the javascript
+                        jQuery(document).ready(function() {
+                        	try{
+                        		ReactDOM.render(
+                            		React.createElement(VariationSequence,{data: {} }),document.getElementById('sequence-browser-variation'));
+                        	}
+                        	catch(err){
+                        			// do nothing ...
+                        	}
+                        }) 
+                      </script>
+                </div>
+          </div>
+           <div class="clearfix"></div>
+      </div>
+    </div>
+    {% elif page == "gene" %}
+    <!-- Sequences browser -->
+    <div class="banner_new_bg2">
+      <div class="con_banner">
+        <div class="images_secs" style="padding: 0 205px;">
+              <img src="{{ baseUrl }}/genopedia/images/chromosome_highlight/big_img_c{{ chromosome }}.png" alt="">
+              <div class="inner_con_banner" style = "margin: 345px auto 60px">
+                  <div id="sequence-browser-gene" class="static-div-sequence"></div>
+                      <script>
+                        jQuery(document).ready(function() {
+                        	try{
+                        		ReactDOM.render(
+                            		React.createElement(GeneSequence,{data: {} }),document.getElementById('sequence-browser-gene'));
+                        	}
+                        	catch(err){
+                        		// do nothing ...
+                        	}
+                        })
+                      </script>
+                  </div>
+              </div>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+    {% endif %}
+<!--/sequences browser -->
+<!-- End Include squences -->
+<div class="main_cons">
+    <div class="container-fluid containerinnerpart">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                {% for block_html in main_blocks_html %}
+                    {{ block_html | safe }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8">
+                {% for block_html in left_blocks_html %}
+                    {{ block_html | safe }}
+                {% endfor %}
+                <br>
+                <br>
+                <br>
+                <!-- Comment -->
+                <div id="commentReact">
+                </div>
+                <!-- /Comment -->
+            </div>
+            <div class="col-md-4 col-sm-4">
+                {% for block_html in right_blocks_html %}
+                    {{ block_html | safe }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<script src="{% static 'genopedia/js/commentComponent.js' %}" type="text/javascript"></script>
+<script>
+  var comments = {
+    'page': '{{ page }}',
+    'entity': '{{ entity }}',
+  }
+  ReactDOM.render(React.createElement(CommentComponent, {
+          loadingSrc: "{{ baseUrl }}/genopedia/images/gif/loading.gif",
+          comments: comments
+      }), document.getElementById('commentReact'));
+</script>

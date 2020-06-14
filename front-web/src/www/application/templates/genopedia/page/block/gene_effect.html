@@ -1,0 +1,42 @@
+<div>
+    <span>
+      <h1 class="green_border_txt">{{ title }}
+          <a href="/{{ key }}_block/view/{{ id }}">
+            <i id="text-block-{{ id }}" class="pull-right clickable fa fa-pencil-square-o editable edit-text-block-{{ id }}" aria-hidden="true"></i>
+          </a>
+      </h1>
+    </span>
+    <!-- <h1 class="green_border_txt">{{ title }}</h1> -->
+    <div class="risk_secs">
+        <div class="innertable">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bold_txt">Effect</th>
+                        <th class="bold_txt">Type</th>
+                        <th class="bold_txt">Publication</th>
+                        <th class="bold_txt">Evidences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for eff in effects %}
+                        <tr>
+                            <td>
+                                <p> {{ eff.effect }} </p>
+                            </td>
+                            <td>
+                                <p> {{ eff.type }} </p>
+                            </td>
+                            <td>
+                                <p> {{ eff.publication }} </p>
+                            </td>
+                            <td>
+                                <p> {{ eff.evidences }} </p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
